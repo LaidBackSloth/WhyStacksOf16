@@ -1,0 +1,40 @@
+plugins {
+	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+version = "fabric-${project.mod_version}"
+group = "com.laidbacksloth.${project.mod_id}"
+archivesBaseName = project.mod_id
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+	Map<String, ?> ex = new HashMap<>()
+	ex.put("id", project.mod_id)
+	ex.put("name", project.mod_name)
+	ex.put("version", project.mod_version)
+	ex.put("description", project.mod_description)
+	ex.put("main", project.main_name)
+	ex.put("curseforge", project.curseforge_name)
+	ex.put("minecraftVersion", project.minecraft_version)
+	ex.put("loaderVersion", project.loader_version)
+
+	filesMatching("fabric.mod.json") {
+		expand(ex)
+	}
+}
+processResources.outputs.upToDateWhen{ false }
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
