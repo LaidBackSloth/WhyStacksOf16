@@ -13,7 +13,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = "forge-${project.mod_version}-${project.minecraft_version}"
+version = "forge-${project.mod_version}"
 group = "com.laidbacksloth.${project.mod_id}"
 archivesBaseName = project.mod_id
 
@@ -90,7 +90,6 @@ processResources {
     ex.put("curseforge", project.curseforge_name)
     ex.put("minecraftVersion", project.minecraft_version)
     ex.put("minForgeVersion", project.forge_version_min)
-    ex.put("nextMinecraftVersion", project.minecraft_version_next)
 
     filesMatching("META-INF/mods.toml") {
         expand(ex)

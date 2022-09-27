@@ -9,12 +9,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod("wso16")
 public class WhyStacksOf16 {
-    private static final Logger LOGGER = LogManager.getLogger();
-
     public WhyStacksOf16() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::commonSetup);
@@ -26,7 +23,7 @@ public class WhyStacksOf16 {
                 try {
                     ObfuscationReflectionHelper.setPrivateValue(Item.class, item, 64, "f_41370_");
                 } catch (Exception e) {
-                    LOGGER.error("Could not change the max stack-size of " + item.getRegistryName() + ", exception: " + e);
+                    LogManager.getLogger().error("Could not change the max stack-size of " + item.getRegistryName() + ", exception: " + e);
                 }
             }
         }));
